@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser';
 import session from 'express-session';
 
 import userRoutes from './routes/user.js';
+import storeRoutes from './routes/store.js';
 
 //create the path
 
@@ -26,6 +27,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
+
 // template engine
 
 app.set('view engine', 'ejs');
@@ -36,11 +38,20 @@ app.use(cookieParser());
 app.use(session({
     secret: process.env.SECRET,
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: {
+        httpOnly: true
+    }
 }));
-//user routes
 
-app.use('/user', userRoutes);
+
+//serve Static Folder
+
+app.use(express.static(path.join(PATH,'public')));
+
+//user routes
+app.use(userRoutes);
+app.use(storeRoutes);
 
 // handle 404
 app.use('*',(req,res)=>{

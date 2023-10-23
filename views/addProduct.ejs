@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Add Product</title>
+</head>
+<body>
+    <%- include('./includes/nav.ejs',{isLoggedIn:isLoggedIn}) %>
+    <div class="form-container">
+        <form action="/add-product" method="POST">
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name"/>
+
+            <label for="price">Price:</label>
+            <input type="number" name="price" id="price" step="0.01"/>
+
+            <label for="img">Image:</label>
+            <input type="url" name="url" id="url"/>
+            <button type="submit">Add product</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,12 +1,12 @@
 import express from 'express';
-const userRoutes = express.Router();
+import userControllers from '../controllers/user.js';
 
-import userController from '../controllers/user.js';
+const router = express.Router();
 
-// set cookie and session
-userRoutes.get('/', userController.setCookiesAndSession);
+router.get('/form-sign-up', userControllers.signUpForm);
+router.get('/form-login', userControllers.loginForm);
+router.post('/sign-up', userControllers.signUp);
+router.post('/login', userControllers.logIn);
+router.get('/log-out', userControllers.logOut);
 
-//get cookie & session
-userRoutes.get('/verify', userController.verifyCookiesAndSession);
-
-export default userRoutes;
+export default router;
